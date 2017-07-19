@@ -7,7 +7,7 @@ namespace BagOLoot
 {
     public class ChildRegister
     {
-        private List<string> _children = new List<string>();
+        private List<int> _children = new List<int>();
         private string _connectionString = $"Data Source={Environment.GetEnvironmentVariable("BAGOLOOT_DB")}";
         private SqliteConnection _connection;
 
@@ -48,14 +48,14 @@ namespace BagOLoot
             return _lastId != 0;
         }
 
-        public List<string> GetChildren ()
+        public List<int> GetChildren ()
         {
-            return new List<string>();
+            return new List<int>();
         }
 
-        public string GetChild (string name)
+        public int GetChild (int childId)
         {
-            var child = _children.SingleOrDefault(c => c == name);
+            var child = _children.SingleOrDefault(c => c == childId);
 
             // Inevitably, two children will have the same name. Then what?
 

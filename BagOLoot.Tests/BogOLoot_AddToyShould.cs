@@ -26,6 +26,17 @@ namespace BagOLoot.Tests
             // Assert.Equal(_bag.Toys[0], "kite");
         }
 
+        [Fact]
+        public void getListofKidsWithToys ()
+        {
+            int childId = 4;
+            List<int> kidList = _bag.AllChildrenWithAToy(childId);
+
+            Assert.Contains(childId, kidList);
+
+        }
+
+
         // [Fact]
         // public void ReturnListOfToys()
         // {
