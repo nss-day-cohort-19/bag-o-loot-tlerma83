@@ -14,6 +14,7 @@ namespace BagOLoot
             Console.WriteLine ("WELCOME TO THE BAG O' LOOT SYSTEM");
             Console.WriteLine ("*********************************");
             Console.WriteLine ("1. Add a child");
+            Console.WriteLine ("2. Assign toy to a child");
 			Console.Write ("> ");
 
 			// Read in the user's choice
@@ -32,3 +33,14 @@ namespace BagOLoot
         }
     }
 }
+
+
+// else if (choice == 2) {
+//                 Console.WriteLine($"Enter toy to add to Jamal's Bag o' Loot");
+//                 Console.WriteLine($">");
+//                 string childToy = Console.ReadLine();
+//                 ChildToyAdd addToChildList = new ChildToyAdd();
+//                 bool toyAddedId = addToChildList.AddToy(childToy);
+//                 Console.WriteLine($"This toy was added: {childToy} and it is {toyAddedId}");
+
+//             }
