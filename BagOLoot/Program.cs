@@ -33,17 +33,21 @@ namespace BagOLoot
                 bool childId = registry.AddChild(childName);
                 Console.WriteLine(childId);
             }
+            else if (choice == 2) {
+                Console.WriteLine($"Enter the Id for the Child you wish to add a toy for");
+                ChildRegister kidList = new ChildRegister();
+                List<(string, int)> things = kidList.GetChildren();
+
+                foreach (var item in things)
+                {
+                    Console.WriteLine($"I am a motherfucking kid {item}");
+                }
+                Console.WriteLine($">");
+                // string childToy = Console.ReadLine();
+                // BagofLoot newToy = new BagofLoot();
+                // bool toyAddedId = addToChildList.AddToy(childToy);
+                // Console.WriteLine($"This toy was added: {childToy} and it is {toyAddedId}");
+            }
         }
     }
 }
-
-
-// else if (choice == 2) {
-//                 Console.WriteLine($"Enter toy to add to Jamal's Bag o' Loot");
-//                 Console.WriteLine($">");
-//                 string childToy = Console.ReadLine();
-//                 ChildToyAdd addToChildList = new ChildToyAdd();
-//                 bool toyAddedId = addToChildList.AddToy(childToy);
-//                 Console.WriteLine($"This toy was added: {childToy} and it is {toyAddedId}");
-
-//             }
