@@ -10,7 +10,8 @@ namespace BagOLoot
 
         private string _connectionString = $"Data Source={Environment.GetEnvironmentVariable("BAGOLOOT_DB")}";
         private SqliteConnection _toyConnection;
-        public List<(string, int)> ToyList {get; set;}= new List<(string, int)>();
+        private List<(string, int)> ToyList {get; set;}= new List<(string, int)>();
+        private List<Toy> _KidsWithToys = new List<Toy>();
 
         public BagofLoot () {
             _toyConnection = new SqliteConnection(_connectionString);
@@ -59,9 +60,33 @@ namespace BagOLoot
             return new List<Toy>();
         }
 
-        public List<int> AllChildrenWithAToy(int childId)
+        public List<Toy> AllChildrenWithAToy(int childId)
         {
-            return new List<int>() {4, 5, 6, 7};
+
+            using (_toyConnection)
+            {
+                _toyConnection.Open ();
+                SqliteCommand dbcmd = _toyConnection.CreateCommand ();
+
+                //select the id and name of every child
+                dbcmd.CommandText = "select id, toy, childID from toy";
+
+                using (SqliteDataReader dr = dbcmd.ExecuteReader())
+                {
+                    //Read each row in the result set
+                    while (dr.Read())
+                    {
+                        // Child newChild = new Child(dr[1].ToString(), dr.GetInt32(0), dr.GetBoolean(2));
+                        _KidsWithToys.Add(new Toy(dr[1].ToString(), dr.GetInt32(0), dr.GetInt32(2))); //Add child name to list
+                    }
+                }
+                //clean up
+                dbcmd.Dispose ();
+                _toyConnection.Close ();
+            }
+
+            return _KidsWithToys;
+            // return new List<int>() {4, 5, 6, 7};
         }
     }
 }

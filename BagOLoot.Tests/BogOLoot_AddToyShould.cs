@@ -26,9 +26,9 @@ namespace BagOLoot.Tests
         public void getListofKidsWithToys ()
         {
             int childId = 4;
-            List<int> kidList = _bag.AllChildrenWithAToy(childId);
+            List<Toy> kidList = _bag.AllChildrenWithAToy(childId);
 
-            Assert.Contains(childId, kidList);
+            Assert.IsType<List<Toy>>(kidList);
 
         }
 

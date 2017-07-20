@@ -37,9 +37,9 @@ namespace BagOLoot
                 Console.WriteLine($"Enter the Id for the Child you wish to add a toy for");
                 ChildRegister kidList = new ChildRegister();
                 BagofLoot newBag = new BagofLoot();
-                List<Child> things = kidList.GetChildren();
+                List<Child> kids = kidList.GetChildren();
 
-                foreach (var item in things)
+                foreach (var item in kids)
                 {
                     Console.WriteLine($"I am a motherfucking kid {item.name} here is my ID {item.childId}");
                 }
@@ -53,13 +53,24 @@ namespace BagOLoot
                 string toyName = Console.ReadLine();
                 Console.WriteLine($"This is what you typed {toyName}");
                 newBag.AddToyToBag(toyName, childIDSlected);
-
-                
-
-                // string childToy = Console.ReadLine();
-                // BagofLoot newToy = new BagofLoot();
-                // bool toyAddedId = addToChildList.AddToy(childToy);
-                // Console.WriteLine($"This toy was added: {childToy} and it is {toyAddedId}");
+            }else if (choice == 3) {
+                ChildRegister kidList = new ChildRegister();
+                BagofLoot newBag = new BagofLoot();
+                List<Child> kids = kidList.GetChildren();
+                foreach (var item in kids)
+                {
+                    Console.WriteLine($"{item.name} my ID is {item.childId}");
+                }
+                Console.WriteLine($"Enter ID for child you want to Revoke toy from");
+                Console.Write($">");
+                int childIDSelected = int.Parse(Console.ReadLine());
+                List<Toy> toys = newBag.AllChildrenWithAToy(childIDSelected);
+                foreach (var item in toys)
+                {
+                    Console.WriteLine($"Toy: {item.toyName}  ID: {item.toyId}");
+                }
+                Console.WriteLine($"Enter the toy ID to remove");
+                int toyID = int.Parse(Console.ReadLine());
             }
         }
     }
