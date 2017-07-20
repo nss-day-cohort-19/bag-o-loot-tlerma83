@@ -63,8 +63,8 @@ namespace BagOLoot
                     //Read each row in the result set
                     while (dr.Read())
                     {
-                        Child newChild = new Child(dr[1].ToString(), dr.GetInt32(0), dr.GetBoolean(2));
-                        _children.Add(newChild); //Add child name to list
+                        // Child newChild = new Child(dr[1].ToString(), dr.GetInt32(0), dr.GetBoolean(2));
+                        _children.Add(new Child(dr[1].ToString(), dr.GetInt32(0), dr.GetBoolean(2))); //Add child name to list
                     }
                 }
 

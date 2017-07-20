@@ -14,16 +14,12 @@ namespace BagOLoot.Tests
 
 
         [Fact]
-        public void HaveToysAddedToIt()
+        public void ShouldAddToyToBag()
         {
             string ToyName = "Skateboard";
             int childId = 715;
-            int toyId = _bag.AddToyToBag(ToyName, childId);
-            List<int> toys = _bag.GetChildsToys(childId);
-
-            Assert.Contains(toyId, toys);
-            // _bag.AddToy("kite"); 
-            // Assert.Equal(_bag.Toys[0], "kite");
+            bool toyAdded = _bag.AddToyToBag(ToyName, childId);
+            Assert.True(toyAdded);
         }
 
         [Fact]
@@ -36,12 +32,14 @@ namespace BagOLoot.Tests
 
         }
 
+        [Fact]
+         public void ReturnToyListPerChild ()
+        {
+            int childId = 4;
+            var ToyList = _bag.GetToyListPerChild(childId);
 
-        // [Fact]
-        // public void ReturnListOfToys()
-        // {
-        //     var result = _bag.GetToys();
-        //     Assert.IsType<List<string>>(result);
-        // }
+            Assert.IsType<List<Toy>>(ToyList);
+
+        }
     }
 }

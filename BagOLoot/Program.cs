@@ -36,13 +36,26 @@ namespace BagOLoot
             else if (choice == 2) {
                 Console.WriteLine($"Enter the Id for the Child you wish to add a toy for");
                 ChildRegister kidList = new ChildRegister();
+                BagofLoot newBag = new BagofLoot();
                 List<Child> things = kidList.GetChildren();
 
                 foreach (var item in things)
                 {
-                    Console.WriteLine($"I am a motherfucking kid {item}");
+                    Console.WriteLine($"I am a motherfucking kid {item.name} here is my ID {item.childId}");
                 }
-                Console.WriteLine($">");
+                Console.Write($">");
+                Console.WriteLine($"Choose child's ID to add toy");
+                int childIDSlected = int.Parse(Console.ReadLine());
+
+                Console.WriteLine($"Type the toy name for the child");
+                Console.Write($">");
+
+                string toyName = Console.ReadLine();
+                Console.WriteLine($"This is what you typed {toyName}");
+                newBag.AddToyToBag(toyName, childIDSlected);
+
+                
+
                 // string childToy = Console.ReadLine();
                 // BagofLoot newToy = new BagofLoot();
                 // bool toyAddedId = addToChildList.AddToy(childToy);

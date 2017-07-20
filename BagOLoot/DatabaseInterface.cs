@@ -11,10 +11,12 @@ namespace BagOLoot
     {
         private string _connectionString = $"Data Source={Environment.GetEnvironmentVariable("BAGOLOOT_DB")}";
         private SqliteConnection _connection;
+        private SqliteConnection _toyConnection;
 
         public DatabaseInterface()
         {
             _connection = new SqliteConnection(_connectionString);
+            _toyConnection = new SqliteConnection(_connectionString);
         }
 
         public void Check ()
@@ -52,6 +54,48 @@ namespace BagOLoot
                 }
                 _connection.Close ();
             }
+
+
+
+
+
+
+            using (_toyConnection)
+            {
+                _toyConnection.Open();
+                SqliteCommand dbcmd = _toyConnection.CreateCommand ();
+
+                // Query the child table to see if table is created
+                dbcmd.CommandText = $"select id from toy";
+
+                try
+                {
+                    // Try to run the query. If it throws an exception, create the table
+                    using (SqliteDataReader reader = dbcmd.ExecuteReader())
+                    {
+                        
+                    }
+                    dbcmd.Dispose ();
+                }
+                catch (Microsoft.Data.Sqlite.SqliteException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    if (ex.Message.Contains("no such table"))
+                    {
+                        dbcmd.CommandText = $@"create table toy (
+                            `id`	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+                            `toy`	varchar(80) not null,
+                            `childID` integer NOT NULL
+                        )";
+                        dbcmd.ExecuteNonQuery ();
+                        dbcmd.Dispose ();
+                    }
+                }
+                _toyConnection.Close ();
+            }
+
+
+
         }
     }
 }
