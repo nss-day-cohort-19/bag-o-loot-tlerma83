@@ -36,7 +36,7 @@ namespace BagOLoot
             else if (choice == 2) {
                 Console.WriteLine($"Enter the Id for the Child you wish to add a toy for");
                 ChildRegister kidList = new ChildRegister();
-                List<(string, int)> things = kidList.GetChildren();
+                List<Child> things = kidList.GetChildren();
 
                 foreach (var item in things)
                 {
